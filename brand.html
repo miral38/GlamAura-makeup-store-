@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Brand Products | GlamAura</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .product-card img { height: 200px; object-fit: cover; }
+    .btn-pink { background-color: #ff4d6d; color: white; }
+    .btn-pink:hover { background-color: #e03e5b; color: white; }
+    .btn-outline-pink { border: 1px solid #ff4d6d; color: #ff4d6d; }
+    .btn-outline-pink:hover { background-color: #ff4d6d; color: white; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-light bg-white shadow-sm">
+  <div class="container d-flex align-items-center justify-content-between">
+    <a class="navbar-brand logo" href="index.html">GlamAura</a>
+    <div class="d-flex align-items-center">
+      <div style="position:relative; cursor:pointer;" onclick="window.location.href='wishlist.html'">
+        <i class="bi bi-heart fs-4 mx-3"></i>
+        <span id="wishlistCount" style="position:absolute; top:-6px; right:-10px; background:#e91e63; color:white; font-size:12px; padding:2px 6px; border-radius:50%; display:none">0</span>
+      </div>
+      <div style="position:relative; cursor:pointer;" onclick="window.location.href='cart.html'">
+        <i class="bi bi-cart fs-4 mx-3"></i>
+        <span id="cartCount" style="position:absolute; top:-6px; right:-10px; background:#e91e63; color:white; font-size:12px; padding:2px 6px; border-radius:50%; display:none">0</span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- BRAND TITLE -->
+<div class="container my-4">
+  <h3 id="brandTitle" class="mb-4 text-center"></h3>
+  <div class="row" id="products"></div>
+</div>
+
+<script>
+  // ---------------- PRODUCTS DATA ----------------
+  const productsData = {
+    maybelline: [
+      { name: "Fit Me Foundation", price: 1499, img: "https://www.makeupcityshop.com/cdn/shop/files/6902395722410.png?v=1717159894" },
+      { name: "Fit Me Concealer", price: 1299, img: "https://makeup4uonline.com/cdn/shop/files/IMG-8096_720x.webp?v=1701636550" },
+      { name: "Mascara Lash Sensational", price: 2399, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAdMmamomOX6ssPV5cPiYENuzBwZKk4N5IVA&s" },
+      { name: "Super Stay Lipstick", price: 1999, img: "https://arooshcosmetics.pk/cdn/shop/files/715WJeuez0L._SL1500.jpg?v=1714692324" }
+    ],
+    huda: [
+      { name: "Eyeshadow Palette", price: 9500, img: "https://beautypouch.pk/cdn/shop/products/Nude_010.jpg?v=1667856317" },
+      { name: "Liquid Lipstick", price: 4200, img: "https://bagallery.com/cdn/shop/products/POweRPink.jpg?v=1744187471" },
+      { name: "Glowish Foundation", price: 6800, img: "https://dubuypk.com/cdn/shop/products/glowish_1200x1200.webp?v=1749728398" },
+      { name: "Easy Bake Powder", price: 7200, img: "https://www.shopaholic.com.pk/cdn/shop/files/huda-beauty-easy-bake-powder-pound-cake.jpg?v=1736940747" }
+    ],
+    rare: [
+      { name: "Soft Pinch Blush", price: 7800, img: "https://www.omsstore.com/cdn/shop/files/rare-beauty-soft-pinch-blush-liquid-frais-299.webp?v=1739657772" },
+      { name: "Liquid Luminizer", price: 8200, img: "https://brandscommunitybytahera.com/cdn/shop/files/IMG-8525.jpg?v=1719138517" },
+      { name: "Lip Soufflé", price: 6500, img: "https://m.media-amazon.com/images/I/51hgr+XTbkL._AC_UF1000,1000_QL80_.jpg" },
+      { name: "Mascara", price: 4900, img: "https://brandzondemand.com/cdn/shop/files/raremas.webp?v=1688099109" }
+    ],
+    nyx: [
+      { name: "Butter Gloss", price: 3200, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDTjsC7yERxx9sQLG3wsx2A6LFuWTBRn4NGQ" },
+      { name: "Soft Matte Lip Cream", price: 3400, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdqwM3OP9S2uMkt-nyaHlBjqcM16Y2i5jB1Q&s"},
+      { name: "Setting Spray", price: 3800, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlsTJc_8DTCFEKyPEVU-pJnHhUfUTDwsl9xg&s" },
+      { name: "Eyeshadow Palette", price: 5600, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNYb2sbZ-ty3HoaF6UbIb7EpRfeQJweBntRA&s" }
+    ],
+    fenty: [
+      { name: "Pro Filt'r Foundation", price: 10500, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-UcA-f0865RxDvWM6cUveKo24YL_7JRs2Rg&s" },
+      { name: "Gloss Bomb", price: 6200, img: "https://cdn.shopify.com/s/files/1/0341/3458/9485/files/FB_SMR25_T2PRODUCT_ECOMM_LE-FRUITZ_GB-BERRY-JELLY_1200x1500_72DPI_600x.jpg?v=1762289987" },
+      { name: "Cheeks Out Blush", price: 8800, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-_y4N3Gl_WvGbH1rACobiy2Q4EIx6GJwHfw&s" },
+      { name: "Killawatt Highlighter", price: 9100, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlic0Ozrs2F2s4iQjWr8mUnsmXimgkD8RGow&s" }
+    ],
+    elf: [
+      { name: "Power Grip Primer", price: 3500, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0VeFS72VsrNvzkw5q_Y9xpzYIWTHe2y6M2w&s" },
+      { name: "Camo Concealer", price: 2900, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLFw3VcfZgswcNR1an4ixFibOkSJUMSasZDQ&s" },
+      { name: "Halo Glow Filter", price: 4200, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCNVM4VsWAIXy-q1GfqgGDlXNxDY4uYER8GA&s" },
+      { name: "Putty Blush", price: 3800, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQz8ldvai9wtOMWdDKQBPcW-xlc6fccKh3PA&s" }
+    ],
+    Rhode: [
+      { name: "blush", price: 15000, img: "//www.rhodeskin.com/cdn/shop/files/mainimage-SQ-sleepygirl_1024x1024.png?v=1717624419" },
+      { name: "milk glaze", price: 9000, img:"https://images.squarespace-cdn.com/content/v1/5a52c0b190badead64a6a944/1725905597158-O0CKO5OJG33UV6ZBU1OU/rhode-glazing-milk-vs-peptide-glazing-fluid-review-comparison.JPG"},
+      { name: "lip tint", price: 5000, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUekAwM5PngqqWHYxXUAaB7i2Xh2YjKfrIoA&s"}
+    ],
+    Summer_fridays: [
+      { name: "lip oil", price: 3600, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIVlrLTHmYM2FHNWfPI3Ydq0e8a235fJNc-A&s" },
+      { name: "lip butter balm", price: 4700, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnjBDoe1hYme_5ZcSM5n6b1TSM9C0FI_16Bw&s"},
+      { name: "Blush", price: 6200, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvBfjihoxrZVnr66wwPSOme7awbIBGTi-CrA&s"}
+    ],
+    Kiko: [
+      { name: "lip gloss", price: 4800, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTweKJpFFnxbFGTekuMqlxmoBkmQDkxGtPZtg&s" },
+      { name: "Foundation", price: 9700, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdq1vL7s8Ld6DVyf8dZKlWW5K-RZ4IxNZneg&s"},
+      { name: "Blush", price: 6200, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH7zGJtzSFewCaSsN_JUpIBAxdAbRV5tSgNw&s"},
+      { name: "Primer", price: 8200, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROYqPL4kBg8QX78QLJMDjJ2S7LcVHCgt2rKQ&s"},
+      { name: "lipstick", price: 4200, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm7NZ8ORjcS-2_cfU0rntq-l07FIUNnOeFAw&s"}
+    ]
+  };
+
+  // ---------------- CART & WISHLIST ----------------
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+  function updateCounts() {
+    const cartBadge = document.getElementById("cartCount");
+    const wishlistBadge = document.getElementById("wishlistCount");
+    if(cartBadge){cartBadge.innerText = cart.length; cartBadge.style.display = cart.length>0?"inline-block":"none";}
+    if(wishlistBadge){wishlistBadge.innerText = wishlist.length; wishlistBadge.style.display = wishlist.length>0?"inline-block":"none";}
+  }
+  updateCounts();
+
+  function addToCart(name, price, img) {
+    cart.push({name, price, img});
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCounts();
+    alert("✅ Product added to cart!");
+  }
+
+  function addToWishlist(name, price, img) {
+    if(!wishlist.find(p => p.name === name)){
+      wishlist.push({name, price, img});
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      updateCounts();
+      alert("💖 Product added to wishlist!");
+    } else {
+      alert("💖 Already in wishlist!");
+    }
+  }
+
+  // ---------------- SHOW BRAND PRODUCTS ----------------
+  const brandParam = new URLSearchParams(window.location.search).get("brand");
+  const brandTitleElem = document.getElementById("brandTitle");
+  const productsDiv = document.getElementById("products");
+
+  if(brandParam && productsDiv){
+    const brandKey = Object.keys(productsData).find(key => key.toLowerCase() === brandParam.toLowerCase());
+
+    if(brandKey){
+      const products = productsData[brandKey];
+      brandTitleElem.innerText = brandKey.charAt(0).toUpperCase() + brandKey.slice(1) + " Products";
+
+      products.forEach(p => {
+        const col = document.createElement("div");
+        col.className = "col-md-3 mb-4";
+        col.innerHTML = `
+          <div class="card product-card text-center">
+            <img src="${p.img}" class="card-img-top product-img">
+            <div class="card-body">
+              <h6>${p.name}</h6>
+              <p class="price">PKR ${p.price}</p>
+              <button class="btn btn-pink w-100 mb-1" onclick="addToCart('${p.name}', ${p.price}, '${p.img}')">Add to Cart</button>
+              <button class="btn btn-outline-pink w-100" onclick="addToWishlist('${p.name}', ${p.price}, '${p.img}')">💖 Wishlist</button>
+            </div>
+          </div>
+        `;
+        productsDiv.appendChild(col);
+      });
+
+    } else {
+      brandTitleElem.innerText = "No products available for this brand.";
+    }
+  }
+</script>
+</body>
+</html>

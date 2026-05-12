@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Brands | GlamAura</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar text-center text-white">
+  Shop Original Makeup Brands 
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-light bg-white shadow-sm">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <!-- LOGO -->
+    <a class="navbar-brand logo" href="index.html">GlamAura</a>
+
+    <!-- ICONS -->
+    <div class="d-flex align-items-center">
+
+      <!-- WISHLIST -->
+      <div style="position:relative; cursor:pointer;"
+           onclick="window.location.href='wishlist.html'">
+        <i class="bi bi-heart fs-4 mx-3"></i>
+        <span id="wishlistCount"
+              style="
+                position:absolute;
+                top:-6px;
+                right:-10px;
+                background:#e91e63;
+                color:white;
+                font-size:12px;
+                padding:2px 6px;
+                border-radius:50%;
+                display:none;
+              ">0</span>
+      </div>
+
+      <!-- CART WITH COUNT -->
+      <div style="position:relative; cursor:pointer;"
+           onclick="window.location.href='cart.html'">
+        <i class="bi bi-cart fs-4 mx-3"></i>
+        <span id="cartCount"
+              style="
+                position:absolute;
+                top:-6px;
+                right:-10px;
+                background:#e91e63;
+                color:white;
+                font-size:12px;
+                padding:2px 6px;
+                border-radius:50%;
+                display:none;
+              ">0</span>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- BRANDS LIST -->
+<div class="container my-5">
+  <h3 class="text-center mb-4">Shop by Brand</h3>
+
+  <div class="row g-4 text-center">
+
+    <div class="col-md-3">
+      <a class="brand-box" href="brand.html?brand=maybelline">Maybelline</a>
+    </div>
+
+    <div class="col-md-3">
+      <a class="brand-box" href="brand.html?brand=huda">Huda Beauty</a>
+    </div>
+
+    <div class="col-md-3">
+      <a class="brand-box" href="brand.html?brand=rare">Rare Beauty</a>
+    </div>
+
+    <div class="col-md-3">
+      <a class="brand-box" href="brand.html?brand=nyx">NYX</a>
+    </div>
+
+    <div class="col-md-3">
+      <a class="brand-box" href="brand.html?brand=fenty">Fenty Beauty</a>
+    </div>
+
+    <div class="col-md-3">
+      <a class="brand-box" href="brand.html?brand=elf">ELF</a>
+    </div>
+
+    <div class="col-md-3">
+  <a class="brand-box" href="brand.html?brand=Rhode">Rhode</a>
+</div>
+ <div class="col-md-3">
+  <a class="brand-box" href="brand.html?brand=Summer_fridays">Summer fridays</a>
+</div>
+ <div class="col-md-3">
+  <a class="brand-box" href="brand.html?brand=Kiko">Kiko</a>
+</div>
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+  // ---------------- CART & WISHLIST ----------------
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+  function updateCounts() {
+    const cartBadge = document.getElementById("cartCount");
+    const wishlistBadge = document.getElementById("wishlistCount");
+
+    if(cartBadge) {
+      cartBadge.innerText = cart.length;
+      cartBadge.style.display = cart.length > 0 ? "inline-block" : "none";
+    }
+    if(wishlistBadge) {
+      wishlistBadge.innerText = wishlist.length;
+      wishlistBadge.style.display = wishlist.length > 0 ? "inline-block" : "none";
+    }
+  }
+
+  // Call on page load to show counts
+  updateCounts();
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

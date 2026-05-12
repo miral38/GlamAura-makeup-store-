@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GlamAura | Makeup Store</title>
+
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- TOP BAR -->
+<div class="top-bar text-center">
+  <a href="track.html" class="text-white text-decoration-none">Track Your Order</a>
+</div>
+
+<!-- HEADER -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+  <div class="container">
+
+    <a class="navbar-brand logo" href="index.html">GlamAura</a>
+
+    <form class="d-flex mx-auto w-50">
+      <input id="searchInput" class="form-control rounded-pill" type="search" placeholder="Search makeup, brands...">
+    </form>
+
+    <div class="position-relative">
+
+      <!-- CART ICON WITH COUNT -->
+      <span style="position:relative; display:inline-block;">
+        <i class="bi bi-cart3 fs-4 mx-2"
+           style="cursor:pointer;"
+           onclick="window.location.href='cart.html'"></i>
+
+        <!-- CART COUNT -->
+        <span id="cartCount" class="cart-badge">0</span>
+      </span>
+
+      <!-- WISHLIST -->
+      <i class="bi bi-heart fs-4 mx-2"
+         style="cursor:pointer;"
+         onclick="window.location.href='wishlist.html'"></i>
+
+    </div>
+  </div>
+</nav>
+
+<!-- BRANDS LINK -->
+<div class="text-center py-2">
+  <a href="brands.html" class="text-decoration-none brand-link">Brands</a>
+</div>
+
+<!-- HERO -->
+<section class="hero text-center">
+  <h1>Glow Like Never Before</h1>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<div id="featuredProducts" class="container my-5">
+  <h3 class="text-center mb-4">Featured Products</h3>
+  <div id="featuredRow" class="row g-4">
+
+    <!-- Product 1 -->
+    <div class="col-md-3">
+      <div class="card product-card text-center">
+        <img src="https://www.makeupcityshop.com/cdn/shop/files/6902395722410.png?v=1717159894" class="product-img">
+        <div class="card-body">
+          <h6>Maybelline Fit Me Foundation</h6>
+          <p class="price">PKR 1,499</p>
+          <button class="btn btn-pink w-100"
+            onclick="addToCart('Maybelline Fit Me Foundation', 1499, 'https://www.makeupcityshop.com/cdn/shop/files/6902395722410.png?v=1717159894')">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="col-md-3">
+      <div class="card product-card text-center">
+        <img src="https://beautypouch.pk/cdn/shop/products/Nude_010.jpg?v=1667856317" class="product-img">
+        <div class="card-body">
+          <h6>Huda Beauty Eyeshadow</h6>
+          <p class="price">PKR 9,500</p>
+          <button class="btn btn-pink w-100"
+            onclick="addToCart('Huda Beauty Eyeshadow', 9500, 'https://beautypouch.pk/cdn/shop/products/Nude_010.jpg?v=1667856317')">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="col-md-3">
+      <div class="card product-card text-center">
+        <img src="https://www.omsstore.com/cdn/shop/files/rare-beauty-soft-pinch-blush-liquid-frais-299.webp?v=1739657772" class="product-img">
+        <div class="card-body">
+          <h6>Rare Beauty Blush</h6>
+          <p class="price">PKR 7,800</p>
+          <button class="btn btn-pink w-100"
+            onclick="addToCart('Rare Beauty Blush', 7800, 'https://www.omsstore.com/cdn/shop/files/rare-beauty-soft-pinch-blush-liquid-frais-299.webp?v=1739657772')">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="col-md-3">
+      <div class="card product-card text-center">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDTjsC7yERxx9sQLG3wsx2A6LFuWTBRn4NGQ&s" class="product-img">
+        <div class="card-body">
+          <h6>NYX Butter Gloss</h6>
+          <p class="price">PKR 3,200</p>
+          <button class="btn btn-pink w-100"
+            onclick="addToCart('NYX Butter Gloss', 3200, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwP9pHarhYPAHs2vrYQCLVyoNAFCH-fTCe6g&s')">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SEARCH RESULTS -->
+<div class="container my-5">
+  <div id="noResult" class="text-center text-danger d-none">❌ Product not available</div>
+  <div id="searchResults" class="row g-4 d-none"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer text-center">
+  <p>Follow us on:</p>
+  <a href="https://instagram.com" target="_blank">Instagram</a> |
+  <a href="https://facebook.com" target="_blank">Facebook</a> |
+  <a href="about.html">About Us</a> |
+  <a href="privacy.html">Privacy Policy</a> |
+  <a href="track.html">Track Order</a> |
+  <a href="cart.html">Cart</a>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
